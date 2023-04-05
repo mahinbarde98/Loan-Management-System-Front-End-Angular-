@@ -1,0 +1,58 @@
+<a routerLink="/baseadmin" style="">....previous-page</a>
+<div class="container mt-5">
+    <mat-card class="text-center">
+        <h1>Loan Form</h1>
+        <form [formGroup]="customerData">
+            <div class="form-group row">
+                <label for="userFirstName" class="col-sm-2 col-form-label">FirstName:</label>
+                <div class="col-sm-15">
+                    <input type="text" formControlName="userFirstName" id="userFirstName"
+                        placeholder="Enter First name of the Customer" class="form-control mb-3">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="userLastName" class="col-sm-2 col-form-label">LastName:</label>
+                <div class="col-sm-15">
+                    <input type="text" formControlName="userLastName" id="userLastName"
+                        placeholder="Enter Last name of the Customer" class="form-control mb-3">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="payment" class="col-sm-2 col-form-label">Payment:</label>
+                <div class="col-sm-15">
+
+                    <input type="text" formControlName="payment" id="payment"
+                        placeholder="Enter whether payment is done or not" class="form-control mb-3">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="interestRate" class="col-sm-2 col-form-label">InterestRate:</label>
+                <div class="col-sm-15">
+
+                    <input type="text" formControlName="interestRate" id="interestRate"
+                        placeholder="Enter the interest rate" class="form-control mb-3">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="propertyAddress" class="col-sm-2 col-form-label">PropertyAddress:</label>
+                <div class="col-sm-12">
+                    <input type="text" formControlName="propertyAddress" id="propertyAddress"
+                        placeholder="Enter affilated properties of user" class="form-control mb-3">
+                </div>
+            </div>
+
+
+
+
+            <input type="submit" (click)="OnSubmit()" value="Save"
+                class="btn btn-outline-primary form-control rounded-0">
+        </form>
+
+    </mat-card>
+
+
+</div>

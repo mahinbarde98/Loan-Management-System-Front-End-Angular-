@@ -1,0 +1,141 @@
+<a routerLink="/baseadmin" style="font-style: italic;">...previous-page</a>
+<div class="container mt-5">
+
+  <div class="card text-center" style="color: chartreuse; padding: 20px;">
+    <h1>!! Welcome !!</h1>
+    <!-- <form #dataForm="ngForm" (ngSubmit)="search(dataForm)">
+
+            <input 
+            ngModel
+            type="text" placeholder="Search.." name="userName" id="userName"> 
+            <button type="submit"><i class="fa fa-search"></i></button> -->
+    <input type="text" placeholder="Search the record" style="border:1px solid" class="form-control"
+      [(ngModel)]="searchText">
+
+
+    <div class="card-body">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">loanId.</th>
+            <th scope="col">First Name</th>
+            <th scope="col">userLastName</th>
+            <th scope="col">payment</th>
+            <th scope="col">interestRate</th>
+            <th scope="col">propertyAddress</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+          </tr>
+        </thead>
+        <!-- <tbody>
+            <tr *ngFor="let item of loan">
+             <td>{{ item.loanId }}</td>
+            <td>{{ item.userFirstName }}</td>
+            <td>{{ item.userLastName }}</td>
+            <td>{{ item.payment }}</td>
+            <td>{{ item.interestRate }}</td>
+            <td>{{ item.propertyAddress }}</td>
+            </tr>
+          </tbody> -->
+        <tbody>
+          <tr *ngFor="let item of loan1 | filter:searchText">
+            <td>{{ item.loanId }}</td>
+            <td>{{ item.userFirstName }}</td>
+            <td>{{ item.userLastName }}</td>
+            <td>{{ item.payment }}</td>
+            <td>{{ item.interestRate }}</td>
+            <td>{{ item.propertyAddress }}</td>
+            <td *ngIf="userService.roleMatch('Admin') && isLoggedIn()"><button type="button" class="btn btn-primary"
+                data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="edit(item)">Edit</button></td>
+            <td *ngIf="userService.roleMatch('Admin') && isLoggedIn()"><button type="button" class="btn btn-danger"
+                (click)="delete(item)">Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Update LoanDetails</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <!-- Edit form -->
+        <div class="container">
+          <mat-card class="text-center">
+            <form [formGroup]="customerData">
+
+              <div class="form-group row">
+                <label for="loanId" class="col-sm-2 col-form-label">loanId:</label>
+                <div class="col-sm-15">
+                  <input type="text" formControlName="loanId" id="loanId" placeholder="loanid"
+                    class="form-control mb-2">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="userFirstName" class="col-sm-2 col-form-label">FirstName:</label>
+                <div class="col-sm-15">
+                  <input type="text" formControlName="userFirstName" id="userFirstName"
+                    placeholder="Enter First name of the Customer" class="form-control mb-2">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="userLastName" class="col-sm-2 col-form-label">LastName:</label>
+                <div class="col-sm-15">
+                  <input type="text" formControlName="userLastName" id="userLastName"
+                    placeholder="Enter Last name of the Customer" class="form-control mb-2">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="payment" class="col-sm-2 col-form-label">Payment:</label>
+                <div class="col-sm-15">
+
+                  <input type="text" formControlName="payment" id="payment"
+                    placeholder="Enter whether payment is done or not" class="form-control mb-2">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="interestRate" class="col-sm-2 col-form-label">InterestRate:</label>
+                <div class="col-sm-15">
+
+                  <input type="text" formControlName="interestRate" id="interestRate"
+                    placeholder="Enter the interest rate" class="form-control mb-2">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="propertyAddress" class="col-sm-2 col-form-label">PropertyAddress:</label>
+                <div class="col-sm-12">
+                  <input type="text" formControlName="propertyAddress" id="propertyAddress"
+                    placeholder="Enter affilated properties of user" class="form-control mb-2">
+                </div>
+              </div>
+
+              <input type="submit" value="Update" (click)="updateLoan()"
+                class="btn btn-outline-primary form-control rounded-0">
+            </form>
+
+          </mat-card>
+
+        </div>
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      <button type="button" class="btn btn-primary">Save changes</button>
+    </div>
+  </div>
+</div>
